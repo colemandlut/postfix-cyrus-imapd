@@ -12,7 +12,7 @@ ENV TLS_KEY_FILE "/etc/pki/tls/certs/server.pem"
 #************************************************************
 #*  Updateし、postfix、cyrus-imapd、cyrus-sasl-md5、cyrus-saslをインストールする                       *
 #************************************************************
-RUN yum -y update && yum -y install postfix cyrus-imapd cyrus-sasl-md5 cyrus-sasl && yum clean all
+RUN yum -y update && yum -y install postfix cyrus-imapd cyrus-sasl-md5 cyrus-sasl cyrus-sasl-plain && yum clean all
 
 
 #/etc/imapd.confの変更
