@@ -74,5 +74,5 @@ VOLUME  ["/Maildir"]
 
 EXPOSE 25
 
-CMD ["/sbin/service saslauthd start && /sbin/service postfix start && /sbin/service cyrus-imapd start && /bin/bash"]
+CMD [bash -c "/sbin/service saslauthd start && /sbin/service postfix start && /sbin/service cyrus-imapd start && /bin/bash"]
 
