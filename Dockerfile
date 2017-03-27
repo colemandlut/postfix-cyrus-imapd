@@ -3,8 +3,6 @@ FROM centos:centos6
 MAINTAINER coleman <coleman_dlut@hotmail.com>
 
 ENV MAILDOMAIN localhost
-ENV SMTPD_TLS_CERT_FILE "/etc/pki/tls/certs/server.crt"
-ENV SMTPD_TLS_KEY_FILE "/etc/pki/tls/certs/server.key"
 ENV TLS_CERT_FILE "/etc/pki/tls/certs/server.pem"
 ENV TLS_KEY_FILE "/etc/pki/tls/certs/server.pem"
 
@@ -76,5 +74,5 @@ VOLUME  ["/Maildir"]
 
 EXPOSE 25
 
-CMD ["service saslauthd start && service postfix start && service cyrus-imapd start && /bin/bash"]
+CMD ["/sbin/service saslauthd start && /sbin/service postfix start && /sbin/service cyrus-imapd start && /bin/bash"]
 
