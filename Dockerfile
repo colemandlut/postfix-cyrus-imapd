@@ -70,7 +70,8 @@ sed -i -e "s/^#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject/ 
 sed -i -e "s/^#cyrus     unix  -       n/cyrus     unix  -       n/" /etc/postfix/master.cf && \
 sed -i -e "s/^#  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver/  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver/" /etc/postfix/master.cf
 
-RUN chmod 644 /etc/sasldb2
+RUN touch /etc/sasldb2 && chmod 644 /etc/sasldb2
+
 VOLUME  ["/Maildir"]
 
 EXPOSE 25
