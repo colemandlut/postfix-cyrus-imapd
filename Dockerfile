@@ -60,7 +60,7 @@ sed -i -e "s/FLAGS=/FLAGS='-r -O 127.0.0.1'/" /etc/sysconfig/saslauthd
 
 #/etc/postfix/master.cfの変更
 RUN sed -i -e "s/^#submission inet n/submission inet n/" /etc/postfix/master.cf && \
-sed -i -e "s/^#  -o smtpd_tls_security_level=encrypt/  -o smtpd_tls_security_level=encrypt/" /etc/postfix/master.cf && \
+sed -i -e "s/^#  -o smtpd_tls_security_level=encrypt/  -o smtpd_tls_security_level=may/" /etc/postfix/master.cf && \
 sed -i -e "s/^#  -o smtpd_sasl_auth_enable=yes/  -o smtpd_sasl_auth_enable=yes/" /etc/postfix/master.cf && \
 sed -i -e "s/^#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject/  -o smtpd_client_restrictions=permit_sasl_authenticated,reject/" /etc/postfix/master.cf && \
 sed -i -e "s/^#smtps     inet  n/smtps     inet  n/" /etc/postfix/master.cf && \
