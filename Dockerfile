@@ -68,7 +68,7 @@ sed -i -e "s/^#  -o smtpd_tls_wrappermode=yes/  -o smtpd_tls_wrappermode=yes/" /
 sed -i -e "s/^#  -o smtpd_sasl_auth_enable=yes/  -o smtpd_sasl_auth_enable=yes/" /etc/postfix/master.cf && \
 sed -i -e "s/^#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject/  -o smtpd_client_restrictions=permit_sasl_authenticated,reject/" /etc/postfix/master.cf && \
 sed -i -e "s/^#cyrus     unix  -       n/cyrus     unix  -       n/" /etc/postfix/master.cf && \
-sed -i -e "s/^#  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver/  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver/" /etc/postfix/master.cf
+sed -i -e "s/^#  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver -e -r \${sender} -m \${extension} \${user}/  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver -e -r \${sender} -m \${extension} \${user}@\${domain}/" /etc/postfix/master.cf
 
 RUN touch /etc/sasldb2 && chmod 644 /etc/sasldb2
 
