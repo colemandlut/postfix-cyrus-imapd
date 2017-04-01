@@ -20,6 +20,7 @@ sed -i -e "s/^sasl_pwcheck_method: auxprop$/a sasl_auxprop_plugin: sasldb" /etc/
 sed -i -e "s/^sasl_mech_list: PLAIN$/sasl_mech_list: LOGIN PLAIN CRAM-MD5 DIGEST-MD5/" /etc/imapd.conf && \
 sed -i -e "s/tls_cert_file: \/etc\/pki\/cyrus-imapd\/cyrus-imapd.pem/tls_cert_file: \/etc\/pki\/tls\/certs\/server.pem/" /etc/imapd.conf && \
 sed -i -e "s/tls_key_file: \/etc\/pki\/cyrus-imapd\/cyrus-imapd.pem/tls_key_file: \/etc\/pki\/tls\/certs\/server.pem/" /etc/imapd.conf && \
+sed -i -e "s/tls_ca_file: \/etc\/pki\/tls\/certs\/ca-bundle.crt/tls_ca_file: \/etc\/pki\/tls\/certs\/server.pem" /etc/imapd.conf && \
 sed -i -e "$ a allowanonymouslogin: no" /etc/imapd.conf && \
 sed -i -e "$ a allowplaintext: yes" /etc/imapd.conf && \
 sed -i -e "$ a autocreateinboxfolders: Sent|Draft|Trash" /etc/imapd.conf && \
