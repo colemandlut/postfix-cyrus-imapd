@@ -23,7 +23,8 @@ sed -i -e '$ a allowanonymouslogin: no' /etc/imapd.conf && \
 sed -i -e '$ a allowplaintext: yes' /etc/imapd.conf && \
 sed -i -e '$ a autocreateinboxfolders: Sent|Draft|Trash' /etc/imapd.conf && \
 sed -i -e '$ a autosubscribeinboxfolders: Sent|Draft|Trash' /etc/imapd.conf && \
-sed -i -e '$ a virtdomains: on' /etc/imapd.conf
+sed -i -e '$ a virtdomains: on' /etc/imapd.conf && \
+sed -i -e '$ a altnamespace: 1' /etc/imapd.conf
 
 #/etc/cyrus.confの変更
 RUN sed -i -e 's/  pop3\t\tcmd="pop3d" listen="pop3" prefork=3/# pop3\t\tcmd="pop3d" listen="pop3" prefork=3/' /etc/cyrus.conf && \
