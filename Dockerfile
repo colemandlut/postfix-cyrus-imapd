@@ -72,9 +72,11 @@ sed -i -e "s/^#  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver -e -r \${sende
 
 RUN touch /etc/sasldb2 && chmod 644 /etc/sasldb2
 
-VOLUME  ["/Maildir"]
+RUN chown cyrus:mail /var/spool/imap/ && chmod 700 /var/spool/imap/
 
-EXPOSE 25
+VOLUME  ["/var/spool/imap"]
+
+EXPOSE 25 587 465 143 993 
 
 CMD bash -c "/sbin/service saslauthd start && /sbin/service postfix start && /sbin/service cyrus-imapd start && /bin/bash"
 
