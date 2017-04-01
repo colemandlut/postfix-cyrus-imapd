@@ -14,17 +14,18 @@ RUN yum -y update && yum -y install postfix cyrus-imapd cyrus-sasl-md5 cyrus-sas
 
 
 #/etc/imapd.confの変更
-RUN sed -i -e 's/admins: cyrus/admins: admin/' /etc/imapd.conf && \
-sed -i -e 's/sasl_pwcheck_method: saslauthd/sasl_pwcheck_method: auxprop \
-sed -i -e "/^sasl_pwcheck_method: auxprop$/a sasl_auxprop_plugin: sasldb" /etc/imapd.conf && \
-sed -i -e 's/tls_cert_file: \/etc\/pki\/cyrus-imapd\/cyrus-imapd.pem/tls_cert_file: \/etc\/pki\/tls\/certs\/server.pem/' /etc/imapd.conf && \
-sed -i -e 's/tls_key_file: \/etc\/pki\/cyrus-imapd\/cyrus-imapd.pem/tls_key_file: \/etc\/pki\/tls\/certs\/server.pem/' /etc/imapd.conf && \
-sed -i -e '$ a allowanonymouslogin: no' /etc/imapd.conf && \
-sed -i -e '$ a allowplaintext: yes' /etc/imapd.conf && \
-sed -i -e '$ a autocreateinboxfolders: Sent|Draft|Trash' /etc/imapd.conf && \
-sed -i -e '$ a autosubscribeinboxfolders: Sent|Draft|Trash' /etc/imapd.conf && \
-sed -i -e '$ a virtdomains: on' /etc/imapd.conf && \
-sed -i -e '$ a altnamespace: 1' /etc/imapd.conf
+RUN sed -i -e "s/^admins: cyrus/admins: admin/" /etc/imapd.conf && \
+sed -i -e "s/^sasl_pwcheck_method: saslauthd$/sasl_pwcheck_method: auxprop/" /etc/imapd.conf && \
+sed -i -e "s/^sasl_pwcheck_method: auxprop$/a sasl_auxprop_plugin: sasldb/" /etc/imapd.conf && \
+sed -i -e "s/^sasl_mech_list: PLAIN$/sasl_mech_list: LOGIN PLAIN CRAM-MD5 DIGEST-MD5/" /etc/imapd.conf && \
+sed -i -e "s/tls_cert_file: \/etc\/pki\/cyrus-imapd\/cyrus-imapd.pem/tls_cert_file: \/etc\/pki\/tls\/certs\/server.pem/" /etc/imapd.conf && \
+sed -i -e "s/tls_key_file: \/etc\/pki\/cyrus-imapd\/cyrus-imapd.pem/tls_key_file: \/etc\/pki\/tls\/certs\/server.pem/" /etc/imapd.conf && \
+sed -i -e "$ a allowanonymouslogin: no" /etc/imapd.conf && \
+sed -i -e "$ a allowplaintext: yes" /etc/imapd.conf && \
+sed -i -e "$ a autocreateinboxfolders: Sent|Draft|Trash" /etc/imapd.conf && \
+sed -i -e "$ a autosubscribeinboxfolders: Sent|Draft|Trash" /etc/imapd.conf && \
+sed -i -e "$ a virtdomains: on" /etc/imapd.conf && \
+sed -i -e "$ a altnamespace: 1" /etc/imapd.conf
 
 #/etc/cyrus.confの変更
 RUN sed -i -e 's/  pop3\t\tcmd="pop3d" listen="pop3" prefork=3/# pop3\t\tcmd="pop3d" listen="pop3" prefork=3/' /etc/cyrus.conf && \
