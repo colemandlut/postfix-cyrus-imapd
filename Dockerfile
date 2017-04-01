@@ -73,6 +73,8 @@ sed -i -e "s/^#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject/ 
 sed -i -e "s/^#cyrus     unix  -       n/cyrus     unix  -       n/" /etc/postfix/master.cf && \
 sed -i -e "s/^#  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver -e -r \${sender} -m \${extension} \${user}/  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver -e -r \${sender} -m \${extension} \${user}@\${domain}/" /etc/postfix/master.cf
 
+RUN sed -i -e "s/^mech_list: plain login$/mech_list: LOGIN PLAIN CRAM-MD5 DIGEST-MD5/" /etc/sasl2/smtpd.conf
+
 RUN touch /etc/sasldb2 && chmod 644 /etc/sasldb2
 
 RUN chown cyrus:mail /var/spool/imap/ && chmod 700 /var/spool/imap/
