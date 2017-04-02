@@ -42,7 +42,7 @@ RUN sed -i -e "s/^#myhostname = virtual.domain.tld/myhostname = freemail.server-
 sed -i -e "s/^#mydomain = domain.tld/mydomain = freemail.server-on.net/" /etc/postfix/main.cf && \
 sed -i -e "s/^inet_interfaces = localhost/inet_interfaces = all/" /etc/postfix/main.cf && \
 sed -i -e "s/^inet_protocols = all/inet_protocols = ipv4/" /etc/postfix/main.cf && \
-sed -i -e "s/^mydestination = $myhostname, localhost.$mydomain, localhost/mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain/" /etc/postfix/main.cf && \
+sed -i -e "s/^mydestination = \$myhostname, localhost.\$mydomain, localhost$/mydestination = \$myhostname, localhost.\$mydomain, localhost, \$mydomain/" /etc/postfix/main.cf && \
 sed -i -e "s/^#local_recipient_maps =\$/local_recipient_maps =/" /etc/postfix/main.cf && \
 sed -i -e "s/^#mailbox_transport = cyrus\$/mailbox_transport = cyrus/" /etc/postfix/main.cf && \
 sed -i -e "s/^#fallback_transport =\$/fallback_transport = cyrus/" /etc/postfix/main.cf && \
@@ -50,7 +50,7 @@ sed -i -e "s/^#smtpd_banner = \$myhostname ESMTP \$mail_name\$/smtpd_banner = \$
 sed -i -e "$ a \ " /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_sasl_auth_enable = yes" /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_sasl_security_options = noanonymous" /etc/postfix/main.cf && \
-sed -i -e "$ a smtpd_sasl_local_domain = $myhostname" /etc/postfix/main.cf && \
+sed -i -e "$ a smtpd_sasl_local_domain = \$myhostname" /etc/postfix/main.cf && \
 sed -i -e "$ a broken_sasl_auth_clients=yes" /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_use_tls = yes" /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_tls_cert_file = /etc/pki/tls/certs/server.crt" /etc/postfix/main.cf && \
