@@ -76,11 +76,12 @@ sed -i -e "s/^#  user=cyrus argv=\/usr\/lib\/cyrus-imapd\/deliver -e -r \${sende
 
 RUN sed -i -e "s/^mech_list: plain login$/mech_list: LOGIN PLAIN CRAM-MD5 DIGEST-MD5/" /etc/sasl2/smtpd.conf
 
-RUN touch /etc/sasldb2 && chmod 644 /etc/sasldb2
-
-RUN chown cyrus:mail /var/spool/imap/ && chmod 700 /var/spool/imap/
+RUN touch /etc/sasldb2 && chmod 644 /etc/sasldb2 && \
+    chown cyrus:mail /var/spool/imap/ && chmod 700 /var/spool/imap/ && \
+    chown cyrus:mail /var/lib/imap/ && chmod 750 /var/lib/imap/
 
 VOLUME  ["/var/spool/imap"]
+VOLUME  ["/var/lib/imap"]
 
 EXPOSE 25 587 465 143 993 
 
