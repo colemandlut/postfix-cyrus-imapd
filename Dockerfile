@@ -56,7 +56,9 @@ sed -i -e "$ a smtpd_use_tls = yes" /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_tls_cert_file = /etc/pki/tls/certs/server.crt" /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_tls_key_file = /etc/pki/tls/certs/server.key" /etc/postfix/main.cf && \
 sed -i -e "$ a smtpd_tls_session_cache_database = btree:/var/lib/postfix/smtpd_scache" /etc/postfix/main.cf && \
-sed -i -e "$ a smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination" /etc/postfix/main.cf
+sed -i -e "$ a smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination" /etc/postfix/main.cf && \
+sed -i -e "$ a mailbox_size_limit = 0" /etc/postfix/main.cf && \
+sed -i -e "$ a message_size_limit = 0" /etc/postfix/main.cf
 
 #/etc/sysconfig/saslauthdの変更
 RUN sed -i -e 's/MECH=pam/MECH=rimap/' /etc/sysconfig/saslauthd && \
